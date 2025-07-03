@@ -3,146 +3,116 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mein Unternehmen</title>
+  <title>Nachhilfe-Portal</title>
   <style>
+    /* Himmelblauer Hintergrund */
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to bottom right, #1e3c72, #2a5298);
-      color: #fff;
-    }
-
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background-color: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      padding: 15px 0;
-      z-index: 1000;
-    }
-
-    nav {
+      height: 100vh;
+      background: #87ceeb; /* Himmelblau */
       display: flex;
       justify-content: center;
-      gap: 30px;
-    }
-
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-      color: #aad4ff;
+      align-items: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
     }
 
     .container {
-      max-width: 960px;
-      margin: 120px auto 60px auto;
-      background-color: rgba(255, 255, 255, 0.1);
-      padding: 40px;
+      position: relative;
+      width: 350px;
+      padding: 40px 30px 50px;
+      text-align: center;
+      z-index: 10;
+    }
+
+    /* Weißer, transparenter Rahmen */
+    .frame {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.8);
       border-radius: 20px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+      background-color: rgba(255, 255, 255, 0.15);
+      z-index: 5;
+      pointer-events: none;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(5px);
     }
 
     h1 {
-      text-align: center;
+      margin-top: 0;
+      margin-bottom: 40px;
+      font-size: 1.8rem;
+      color: #fff;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .button {
+      display: block;
+      background-color: #fff;
+      color: #0077cc;
+      text-decoration: none;
+      padding: 15px 0;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 12px rgba(0, 119, 204, 0.5);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+    }
+
+    .button:hover,
+    .button:focus {
+      background-color: #0077cc;
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(0, 119, 204, 0.8);
+      outline: none;
+    }
+
+    /* Logo SVG Styling */
+    .logo {
       margin-bottom: 30px;
-      font-size: 2.5rem;
-      color: #ffffff;
+      width: 80px;
+      height: 80px;
+      margin-left: auto;
+      margin-right: auto;
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
     }
 
-    h2 {
-      color: #ffffff;
-      border-bottom: 2px solid #ffffff33;
-      padding-bottom: 8px;
-      margin-top: 40px;
-    }
-
-    p {
-      line-height: 1.6;
-      color: #e0e0e0;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-      color: #cccccc;
-    }
-
-    @media (max-width: 600px) {
-      nav {
-        flex-direction: column;
-        gap: 10px;
-      }
-
+    /* Responsive */
+    @media (max-width: 400px) {
       .container {
-        margin: 100px 20px 40px 20px;
-        padding: 25px;
+        width: 90vw;
+        padding: 30px 20px 40px;
       }
-
       h1 {
-        font-size: 2rem;
+        font-size: 1.5rem;
+      }
+      .button {
+        font-size: 1rem;
+        padding: 12px 0;
       }
     }
   </style>
 </head>
 <body>
-
-  <header>
-    <nav>
-      <a href="#unternehmen">Unternehmen</a>
-      <a href="#kontakt">Kontakt</a>
-      <a href="#impressum">Impressum</a>
-    </nav>
-  </header>
-
   <div class="container">
-    <h1>Willkommen bei Mein Unternehmen</h1>
+    <!-- Weißer transparenter Rahmen hinter dem Inhalt -->
+    <div class="frame"></div>
 
-    <section id="unternehmen">
-      <h2>Über uns</h2>
-      <p>
-        Mein Unternehmen GmbH ist ein zukunftsorientiertes Unternehmen mit Sitz in Deutschland. 
-        Wir bieten maßgeschneiderte digitale Lösungen, kreative Strategien und moderne Technologien, 
-        um unsere Kunden in der digitalen Welt zu unterstützen und zu stärken.
-      </p>
-      <p>
-        Unser erfahrenes Team arbeitet mit Leidenschaft an innovativen Konzepten für Webentwicklung, 
-        Automatisierung und Geschäftsprozessoptimierung.
-      </p>
-    </section>
-
-    <section id="kontakt">
-      <h2>Kontakt</h2>
-      <p>
-        📧 E-Mail: <a href="mailto:kontakt@meinunternehmen.de" style="color: #aad4ff;">kontakt@meinunternehmen.de</a><br />
-        ☎️ Telefon: +49 123 4567890<br />
-        📍 Adresse: Musterstraße 1, 12345 Musterstadt
-      </p>
-    </section>
-
-    <section id="impressum">
-      <h2>Impressum</h2>
-      <p>
-        Mein Unternehmen GmbH<br />
-        Geschäftsführer: Max Mustermann<br />
-        Handelsregister: HRB 123456, Amtsgericht Musterstadt<br />
-        Umsatzsteuer-ID: DE123456789
-      </p>
-    </section>
-  </div>
-
-  <footer>
-    &copy; 2025 Mein Unternehmen – Alle Rechte vorbehalten.
-  </footer>
-
-</body>
-</html>
+    <!-- Logo als SVG -->
+    <svg class="logo" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" >
+      <title>Nachhilfe Logo</title>
+      <g fill="none" stroke="#0077cc" stroke-width="2">
+        <!-- Buch -->
+        <path
