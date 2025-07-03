@@ -5,15 +5,17 @@
   <title>Lehrer-Portal</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* Hintergrund kräftig dunkelblau */
     body {
       margin: 0;
       background-color: #002366;
       font-family: Arial, sans-serif;
       color: #000;
+      overflow-x: hidden;
+      position: relative;
+      height: 100vh;
     }
 
-    /* Weißer, leicht transparenter Container mit Rand, der minimal durchsichtig ist */
+    /* Container mit leicht transparentem weißem Hintergrund, zentriert */
     .container {
       background: rgba(255, 255, 255, 0.9);
       max-width: 900px;
@@ -21,91 +23,81 @@
       padding: 30px;
       border-radius: 10px;
       box-shadow:
-        0 0 0 3px rgba(255, 255, 255, 0.3), /* leichter Rand mit wenig Transparenz */
+        0 0 0 3px rgba(255, 255, 255, 0.3),
         0 0 15px rgba(0, 0, 0, 0.3);
+      text-align: center;
       position: relative;
-      min-height: 400px;
-      transition: margin-right 0.3s ease;
+      z-index: 1;
+      transition: opacity 0.3s ease;
     }
 
-    /* Layout: Container links, Sidebar rechts */
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 50px 0;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* Sidebar */
+    /* Vollbild Overlay Sidebar links */
     .sidebar {
       position: fixed;
-      top: 50px;
-      right: 0;
-      width: 250px;
-      height: calc(100vh - 100px);
+      top: 0;
+      left: 0;
+      width: 300px;
+      height: 100vh;
       background-color: rgba(255, 255, 255, 0.95);
-      box-shadow: -2px 0 10px rgba(0,0,0,0.2);
-      border-radius: 10px 0 0 10px;
+      box-shadow: 2px 0 15px rgba(0,0,0,0.3);
       padding: 20px;
       box-sizing: border-box;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: 10;
       display: flex;
       flex-direction: column;
-      transition: transform 0.3s ease;
+    }
+
+    /* Sidebar ausgefahren */
+    .sidebar.open {
       transform: translateX(0);
-      z-index: 1000;
     }
 
-    /* Eingefahrene Sidebar */
-    .sidebar.closed {
-      transform: translateX(250px);
-    }
-
-    /* Menü-Button */
+    /* Menü-Button links außen */
     .toggle-btn {
       position: fixed;
-      top: 60px;
-      right: 250px;
-      width: 30px;
-      height: 60px;
+      top: 20px;
+      left: 0;
+      width: 40px;
+      height: 40px;
       background-color: #002366;
       color: white;
-      cursor: pointer;
+      border-radius: 0 5px 5px 0;
       display: flex;
-      align-items: center;
       justify-content: center;
-      border-radius: 8px 0 0 8px;
+      align-items: center;
       font-size: 24px;
+      cursor: pointer;
+      z-index: 20;
       user-select: none;
-      transition: right 0.3s ease;
-      z-index: 1100;
+      transition: left 0.3s ease;
     }
 
-    /* Button verschieben, wenn Sidebar zu ist */
-    .sidebar.closed ~ .toggle-btn {
-      right: 0;
+    /* Wenn Sidebar offen, Button nach rechts verschieben */
+    .sidebar.open ~ .toggle-btn {
+      left: 300px;
     }
 
     /* Menü-Liste */
     .sidebar nav ul {
       list-style: none;
       padding: 0;
-      margin: 0;
+      margin: 60px 0 0 0;
       flex-grow: 1;
     }
 
     .sidebar nav ul li {
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
 
     .sidebar nav ul li a {
-      text-decoration: none;
       color: #002366;
       font-weight: bold;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
+      text-decoration: none;
       display: block;
-      padding: 8px 12px;
+      padding: 10px 15px;
       border-radius: 5px;
       transition: background-color 0.2s ease;
     }
@@ -114,52 +106,98 @@
       background-color: #e0e0e0;
     }
 
-    /* Container nach rechts schieben, wenn Sidebar offen ist */
-    body.sidebar-open .container {
-      margin-right: 300px; /* Platz für Sidebar + Abstand */
-      transition: margin-right 0.3s ease;
+    /* Content ausgeblendet wenn Sidebar offen */
+    .content-hidden {
+      opacity: 0;
+      pointer-events: none;
+      user-select: none;
     }
-
   </style>
 </head>
 <body>
-  <div class="container">
+  <aside class="sidebar" id="sidebar">
+    <nav>
+      <ul>
+        <li><a href="#" data-content="kalender">Kalender</a></li>
+        <li><a href="#" data-content="lehrinhalte">Lehrinhalte</a></li>
+        <li><a href="#" data-content="studenten">Studenten</a></li>
+        <li><a href="#" data-content="einstellungen">Einstellungen</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="container" id="mainContent">
     <h1>Lehrer-Portal</h1>
     <p>Hier können Lehrer ihre Schüler verwalten, Termine setzen etc.</p>
     <a href="index.html">Zurück zur Startseite</a>
   </div>
 
-  <aside class="sidebar">
-    <nav>
-      <ul>
-        <li><a href="#">Kalender</a></li>
-        <li><a href="#">Lehrinhalte</a></li>
-        <li><a href="#">Studenten</a></li>
-        <li><a href="#">Einstellungen</a></li>
-      </ul>
-    </nav>
-  </aside>
-
-  <div class="toggle-btn" id="toggleSidebar" title="Menü ein-/ausblenden">&#x25C0;</div>
+  <div class="toggle-btn" id="toggleBtn" title="Menü ein-/ausblenden">&#x25B6;</div>
 
   <script>
-    const sidebar = document.querySelector('.sidebar');
-    const toggleBtn = document.getElementById('toggleSidebar');
-    const body = document.body;
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('toggleBtn');
+    const mainContent = document.getElementById('mainContent');
 
-    toggleBtn.addEventListener('click', () => {
-      sidebar.classList.toggle('closed');
-      if(sidebar.classList.contains('closed')) {
-        toggleBtn.innerHTML = '&#x25B6;'; // Pfeil nach rechts
-        body.classList.remove('sidebar-open');
-      } else {
+    // Texte für die verschiedenen Inhalte (Beispiel-Inhalte)
+    const contentMap = {
+      kalender: `
+        <h1>Kalender</h1>
+        <p>Hier sehen Sie Ihre Termine und können neue hinzufügen.</p>
+      `,
+      lehrinhalte: `
+        <h1>Lehrinhalte</h1>
+        <p>Verwalten Sie Ihre Unterrichtsmaterialien und Inhalte.</p>
+      `,
+      studenten: `
+        <h1>Studenten</h1>
+        <p>Übersicht über Ihre Schüler und deren Fortschritt.</p>
+      `,
+      einstellungen: `
+        <h1>Einstellungen</h1>
+        <p>Hier können Sie Ihr Profil und Ihre Einstellungen bearbeiten.</p>
+      `
+    };
+
+    let sidebarOpen = false;
+
+    function toggleSidebar() {
+      sidebarOpen = !sidebarOpen;
+      if (sidebarOpen) {
+        sidebar.classList.add('open');
         toggleBtn.innerHTML = '&#x25C0;'; // Pfeil nach links
-        body.classList.add('sidebar-open');
+        mainContent.classList.add('content-hidden');
+      } else {
+        sidebar.classList.remove('open');
+        toggleBtn.innerHTML = '&#x25B6;'; // Pfeil nach rechts
+        mainContent.classList.remove('content-hidden');
       }
-    });
+    }
 
-    // Initial Zustand: offen + margin-right bei container
-    body.classList.add('sidebar-open');
+    toggleBtn.addEventListener('click', toggleSidebar);
+
+    // Menü Links klicken
+    sidebar.querySelectorAll('nav ul li a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const key = link.getAttribute('data-content');
+        if(contentMap[key]) {
+          mainContent.innerHTML = contentMap[key] + `<p><a href="#" id="backLink">Zurück zum Hauptmenü</a></p>`;
+          toggleSidebar(); // Sidebar schließen
+
+          // Link für zurück zum Hauptmenü
+          const backLink = document.getElementById('backLink');
+          backLink.addEventListener('click', e => {
+            e.preventDefault();
+            mainContent.innerHTML = `
+              <h1>Lehrer-Portal</h1>
+              <p>Hier können Lehrer ihre Schüler verwalten, Termine setzen etc.</p>
+              <a href="index.html">Zurück zur Startseite</a>
+            `;
+          });
+        }
+      });
+    });
   </script>
 </body>
 </html>
