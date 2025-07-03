@@ -6,7 +6,51 @@
   <title>Nachhilfe-Portal</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* Stil für den Registrierungs-Link */
+    /* Hintergrund kräftig dunkelblau */
+    body {
+      background-color: #002366; /* kräftiges Dunkelblau */
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #000; /* Textfarbe, schwarz oder kannst du anpassen */
+    }
+
+    /* Container mit weiß, leicht transparent */
+    .container {
+      background-color: rgba(255, 255, 255, 0.9); /* Weiß mit 90% Deckkraft */
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    /* Buttons bleiben so wie in deinem CSS (hier als Beispiel) */
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .button {
+      background-color: #007bff;
+      color: white;
+      padding: 12px 25px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      width: 100%;
+      max-width: 300px;
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
+    .button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Registrierungs-Link */
     .register-link {
       display: block;
       margin-top: 10px;
@@ -14,7 +58,6 @@
       color: #007bff;
       text-decoration: underline;
       cursor: pointer;
-      text-align: center;
     }
     .register-link:hover {
       color: #0056b3;
