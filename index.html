@@ -1,105 +1,148 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mein Unternehmen</title>
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom right, #1e3c72, #2a5298); /* Blauverlauf */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #1e3c72, #2a5298);
       color: #fff;
     }
 
-    .container {
-      max-width: 1000px;
-      margin: 50px auto;
-      background-color: rgba(255, 255, 255, 0.1); /* Weiß, transparent */
-      padding: 30px;
-      border-radius: 15px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    }
-
-    h1, h2 {
-      color: #fff;
-      text-align: center;
-    }
-
-    p {
-      color: #f0f0f0;
-      line-height: 1.6;
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      padding: 15px 0;
+      z-index: 1000;
     }
 
     nav {
-      text-align: center;
-      margin-bottom: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
     }
 
     nav a {
-      margin: 0 15px;
       color: #fff;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: color 0.3s ease;
     }
 
     nav a:hover {
-      text-decoration: underline;
+      color: #aad4ff;
     }
 
-    .section {
-      margin-bottom: 40px;
+    .container {
+      max-width: 960px;
+      margin: 120px auto 60px auto;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2.5rem;
+      color: #ffffff;
+    }
+
+    h2 {
+      color: #ffffff;
+      border-bottom: 2px solid #ffffff33;
+      padding-bottom: 8px;
+      margin-top: 40px;
+    }
+
+    p {
+      line-height: 1.6;
+      color: #e0e0e0;
     }
 
     footer {
       text-align: center;
-      margin-top: 40px;
-      font-size: 0.9em;
-      color: #aaa;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #cccccc;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .container {
+        margin: 100px 20px 40px 20px;
+        padding: 25px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
+
+  <header>
     <nav>
       <a href="#unternehmen">Unternehmen</a>
       <a href="#kontakt">Kontakt</a>
       <a href="#impressum">Impressum</a>
     </nav>
+  </header>
 
+  <div class="container">
     <h1>Willkommen bei Mein Unternehmen</h1>
 
-    <div class="section" id="unternehmen">
+    <section id="unternehmen">
       <h2>Über uns</h2>
       <p>
-        Wir sind ein innovatives Unternehmen mit Sitz in Deutschland, spezialisiert auf moderne Weblösungen,
-        Beratung und digitale Transformation. Unsere Vision ist es, Technologie zugänglich, effizient und elegant zu gestalten.
+        Mein Unternehmen GmbH ist ein zukunftsorientiertes Unternehmen mit Sitz in Deutschland. 
+        Wir bieten maßgeschneiderte digitale Lösungen, kreative Strategien und moderne Technologien, 
+        um unsere Kunden in der digitalen Welt zu unterstützen und zu stärken.
       </p>
-    </div>
+      <p>
+        Unser erfahrenes Team arbeitet mit Leidenschaft an innovativen Konzepten für Webentwicklung, 
+        Automatisierung und Geschäftsprozessoptimierung.
+      </p>
+    </section>
 
-    <div class="section" id="kontakt">
+    <section id="kontakt">
       <h2>Kontakt</h2>
       <p>
-        E-Mail: kontakt@meinunternehmen.de<br>
-        Telefon: +49 123 4567890<br>
-        Adresse: Musterstraße 1, 12345 Musterstadt
+        📧 E-Mail: <a href="mailto:kontakt@meinunternehmen.de" style="color: #aad4ff;">kontakt@meinunternehmen.de</a><br />
+        ☎️ Telefon: +49 123 4567890<br />
+        📍 Adresse: Musterstraße 1, 12345 Musterstadt
       </p>
-    </div>
+    </section>
 
-    <div class="section" id="impressum">
+    <section id="impressum">
       <h2>Impressum</h2>
       <p>
-        Mein Unternehmen GmbH<br>
-        Geschäftsführer: Max Mustermann<br>
-        Handelsregister: HRB 123456, Amtsgericht Musterstadt<br>
+        Mein Unternehmen GmbH<br />
+        Geschäftsführer: Max Mustermann<br />
+        Handelsregister: HRB 123456, Amtsgericht Musterstadt<br />
         Umsatzsteuer-ID: DE123456789
       </p>
-    </div>
-
-    <footer>
-      &copy; 2025 Mein Unternehmen – Alle Rechte vorbehalten.
-    </footer>
+    </section>
   </div>
+
+  <footer>
+    &copy; 2025 Mein Unternehmen – Alle Rechte vorbehalten.
+  </footer>
+
 </body>
 </html>
