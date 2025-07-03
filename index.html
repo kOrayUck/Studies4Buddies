@@ -1,18 +1,105 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nachhilfe-Portal</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mein Unternehmen</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #1e3c72, #2a5298); /* Blauverlauf */
+      color: #fff;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 50px auto;
+      background-color: rgba(255, 255, 255, 0.1); /* Weiß, transparent */
+      padding: 30px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    h1, h2 {
+      color: #fff;
+      text-align: center;
+    }
+
+    p {
+      color: #f0f0f0;
+      line-height: 1.6;
+    }
+
+    nav {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    nav a {
+      margin: 0 15px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: #aaa;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1>Willkommen im Nachhilfe-Portal</h1>
-    <div class="buttons">
-      <a href="lehrer.html" class="button">Zum Lehrer-Portal</a>
-      <a href="schueler.html" class="button">Zum Schüler-Portal</a>
+    <nav>
+      <a href="#unternehmen">Unternehmen</a>
+      <a href="#kontakt">Kontakt</a>
+      <a href="#impressum">Impressum</a>
+    </nav>
+
+    <h1>Willkommen bei Mein Unternehmen</h1>
+
+    <div class="section" id="unternehmen">
+      <h2>Über uns</h2>
+      <p>
+        Wir sind ein innovatives Unternehmen mit Sitz in Deutschland, spezialisiert auf moderne Weblösungen,
+        Beratung und digitale Transformation. Unsere Vision ist es, Technologie zugänglich, effizient und elegant zu gestalten.
+      </p>
     </div>
+
+    <div class="section" id="kontakt">
+      <h2>Kontakt</h2>
+      <p>
+        E-Mail: kontakt@meinunternehmen.de<br>
+        Telefon: +49 123 4567890<br>
+        Adresse: Musterstraße 1, 12345 Musterstadt
+      </p>
+    </div>
+
+    <div class="section" id="impressum">
+      <h2>Impressum</h2>
+      <p>
+        Mein Unternehmen GmbH<br>
+        Geschäftsführer: Max Mustermann<br>
+        Handelsregister: HRB 123456, Amtsgericht Musterstadt<br>
+        Umsatzsteuer-ID: DE123456789
+      </p>
+    </div>
+
+    <footer>
+      &copy; 2025 Mein Unternehmen – Alle Rechte vorbehalten.
+    </footer>
   </div>
 </body>
 </html>
