@@ -15,7 +15,6 @@
       height: 100vh;
     }
 
-    /* Container mit leicht transparentem weißem Hintergrund, zentriert */
     .container {
       background: rgba(255, 255, 255, 0.9);
       max-width: 900px;
@@ -31,7 +30,18 @@
       transition: opacity 0.3s ease;
     }
 
-    /* Vollbild Overlay Sidebar links */
+    .welcome-box {
+      background-color: #f0f8ff;
+      border: 2px solid #002366;
+      border-radius: 10px;
+      padding: 40px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #002366;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
     .sidebar {
       position: fixed;
       top: 0;
@@ -49,12 +59,10 @@
       flex-direction: column;
     }
 
-    /* Sidebar ausgefahren */
     .sidebar.open {
       transform: translateX(0);
     }
 
-    /* Menü-Button links außen */
     .toggle-btn {
       position: fixed;
       top: 20px;
@@ -74,12 +82,10 @@
       transition: left 0.3s ease;
     }
 
-    /* Wenn Sidebar offen, Button nach rechts verschieben */
     .sidebar.open ~ .toggle-btn {
       left: 300px;
     }
 
-    /* Menü-Liste */
     .sidebar nav ul {
       list-style: none;
       padding: 0;
@@ -106,11 +112,58 @@
       background-color: #e0e0e0;
     }
 
-    /* Content ausgeblendet wenn Sidebar offen */
     .content-hidden {
       opacity: 0;
       pointer-events: none;
       user-select: none;
+    }
+
+    /* Kalender Styles */
+    .calendar {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #f0f8ff;
+      border: 2px solid #002366;
+      border-radius: 10px;
+      padding: 20px;
+      color: #002366;
+    }
+
+    .calendar header {
+      text-align: center;
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .calendar table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .calendar th, .calendar td {
+      width: 14.28%;
+      padding: 10px 0;
+      text-align: center;
+      border: 1px solid #002366;
+      font-weight: normal;
+    }
+
+    .calendar th {
+      background-color: #002366;
+      color: white;
+    }
+
+    .calendar td.today {
+      background-color: #ffcc00;
+      color: black;
+      font-weight: bold;
+      border-radius: 50%;
+      /* Kreis rund machen */
+      width: 36px;
+      height: 36px;
+      line-height: 36px;
+      margin: 0 auto;
     }
   </style>
 </head>
@@ -118,6 +171,7 @@
   <aside class="sidebar" id="sidebar">
     <nav>
       <ul>
+        <li><a href="#" data-content="startseite">Startseite</a></li>
         <li><a href="#" data-content="kalender">Kalender</a></li>
         <li><a href="#" data-content="lehrinhalte">Lehrinhalte</a></li>
         <li><a href="#" data-content="studenten">Studenten</a></li>
@@ -127,9 +181,9 @@
   </aside>
 
   <div class="container" id="mainContent">
-    <h1>Lehrer-Portal</h1>
-    <p>Hier können Lehrer ihre Schüler verwalten, Termine setzen etc.</p>
-    <a href="index.html">Zurück zur Startseite</a>
+    <div class="welcome-box">
+      Herzlich Willkommen im Lehrer-Portal
+    </div>
   </div>
 
   <div class="toggle-btn" id="toggleBtn" title="Menü ein-/ausblenden">&#x25B6;</div>
@@ -139,12 +193,56 @@
     const toggleBtn = document.getElementById('toggleBtn');
     const mainContent = document.getElementById('mainContent');
 
-    // Texte für die verschiedenen Inhalte (Beispiel-Inhalte)
+    // Kalenderfunktion
+    function createCalendar(year, month) {
+      const daysOfWeek = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
+      const today = new Date();
+      const currentYear = today.getFullYear();
+      const currentMonth = today.getMonth();
+      const currentDate = today.getDate();
+
+      const firstDay = new Date(year, month, 1);
+      const lastDay = new Date(year, month + 1, 0);
+      const startDay = firstDay.getDay(); // Wochentag des 1. Tages (0=So)
+      const daysInMonth = lastDay.getDate();
+
+      let html = '<div class="calendar">';
+      html += `<header>${year} - ${month + 1}</header>`;
+      html += '<table><thead><tr>';
+      for(let d=0; d < daysOfWeek.length; d++) {
+        html += `<th>${daysOfWeek[d]}</th>`;
+      }
+      html += '</tr></thead><tbody><tr>';
+
+      // Leere Zellen vor dem ersten Tag
+      for(let i=0; i < startDay; i++) {
+        html += '<td></td>';
+      }
+
+      for(let day=1; day <= daysInMonth; day++) {
+        const isToday = (year === currentYear && month === currentMonth && day === currentDate);
+        if ((startDay + day - 1) % 7 === 0 && day !== 1) {
+          html += '</tr><tr>'; // neue Zeile an Wochentagswechsel
+        }
+        html += isToday ? `<td class="today">${day}</td>` : `<td>${day}</td>`;
+      }
+
+      // Leere Zellen am Ende der Tabelle (optional, damit Tabelle komplett bleibt)
+      const totalCells = startDay + daysInMonth;
+      const remainingCells = (7 - (totalCells % 7)) % 7;
+      for(let i=0; i < remainingCells; i++) {
+        html += '<td></td>';
+      }
+
+      html += '</tr></tbody></table></div>';
+
+      return html;
+    }
+
+    // Inhalte für die Menüpunkte
     const contentMap = {
-      kalender: `
-        <h1>Kalender</h1>
-        <p>Hier sehen Sie Ihre Termine und können neue hinzufügen.</p>
-      `,
+      startseite: `<div class="welcome-box">Herzlich Willkommen im Lehrer-Portal</div>`,
+      kalender: createCalendar(new Date().getFullYear(), new Date().getMonth()),
       lehrinhalte: `
         <h1>Lehrinhalte</h1>
         <p>Verwalten Sie Ihre Unterrichtsmaterialien und Inhalte.</p>
@@ -181,21 +279,14 @@
       link.addEventListener('click', e => {
         e.preventDefault();
         const key = link.getAttribute('data-content');
-        if(contentMap[key]) {
-          mainContent.innerHTML = contentMap[key] + `<p><a href="#" id="backLink">Zurück zum Hauptmenü</a></p>`;
-          toggleSidebar(); // Sidebar schließen
 
-          // Link für zurück zum Hauptmenü
-          const backLink = document.getElementById('backLink');
-          backLink.addEventListener('click', e => {
-            e.preventDefault();
-            mainContent.innerHTML = `
-              <h1>Lehrer-Portal</h1>
-              <p>Hier können Lehrer ihre Schüler verwalten, Termine setzen etc.</p>
-              <a href="index.html">Zurück zur Startseite</a>
-            `;
-          });
+        if (key === 'kalender') {
+          // Kalender immer frisch generieren, um immer aktuellen Tag zu markieren
+          mainContent.innerHTML = createCalendar(new Date().getFullYear(), new Date().getMonth());
+        } else if(contentMap[key]) {
+          mainContent.innerHTML = contentMap[key];
         }
+        toggleSidebar(); // Sidebar schließen
       });
     });
   </script>
